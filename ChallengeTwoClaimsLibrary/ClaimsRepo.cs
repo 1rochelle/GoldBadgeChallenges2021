@@ -8,29 +8,33 @@ namespace ChallengeTwoClaimsLibrary
 {
     public class ClaimsRepo
     {
-        protected readonly List<Claims> _currentClaims = new List<Claims>();
+        protected readonly Queue<Claims> _currentClaims = new Queue<Claims>();
         
         //Create new claim
-        public bool AddClaimToList(Claims newClaim)
+        public bool AddClaimToQueue(Claims newClaim)
         {
             int startingCount = _currentClaims.Count;
-            _currentClaims.Add(newClaim);
+            _currentClaims.Enqueue(newClaim);
             bool wasAdded = (_currentClaims.Count > startingCount) ? true : false;
             return wasAdded;
         }
 
         //Read all claims
-        public List<Claims> GetEntireList()
+        public Queue<Claims> GetEntireQueue()
         {
             return _currentClaims;
         }
-
+        //helper method to display next claim on list
+        public Claims DisplayNextClaim()
+        {
+            //access location
+            return _currentClaims.Peek();
+        }
         //Update, no update needed
         //Delete a claim from the list
-        public bool DeleteClaim(Claims existingClaim)
+        public void DeleteClaim()
         {
-            bool removeClaim = _currentClaims.Remove(existingClaim);
-            return removeClaim;
+            _currentClaims.Dequeue();
         }
     }
 }

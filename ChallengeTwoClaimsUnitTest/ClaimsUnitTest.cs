@@ -9,12 +9,13 @@ namespace ChallengeTwoClaimsUnitTest
     {
         //Testing the Create method
         [TestMethod]
-        public void AddClaimToList_ShouldAddClaim()
+        public void AddClaimToQueue_ShouldAddClaim()
         {
             //can't seem to seed DateTime values***************
-            Claims newClaim = new Claims(1, Car, "in auto accident", 32.01, 8/31/2009 10:03:29 AM, 9/5/2009 9:51:37 PM);
+            Claims newClaim = new Claims(1, ClaimType.Car, "in auto accident", 32.01, new DateTime(2009,2,1), new DateTime(2009,9,5));
             ClaimsRepo _claimsTest = new ClaimsRepo();
-            bool addResult = _claimsTest.AddClaimToList(newClaim);           
+            bool addResult = _claimsTest.AddClaimToQueue(newClaim);
+            Assert.IsTrue(addResult);
         }
         //Here's some private fields
         private ClaimsRepo _claimsTest;
